@@ -1,0 +1,137 @@
+.grid-container{
+  margin: 0;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(500px, 1fr));
+}
+
+.grid{
+  color: white;
+  padding: 35px;
+}
+
+.grid-left-panel{
+  min-width: 28rem;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+  url('https://images.unsplash.com/photo-1621743018966-29194999d736?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjB3b3Jrc3BhY2UlMjBkZXNrfGVufDF8fHx8MTc2MzUwOTg3MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral');
+  background-size: cover;      /* Scales image to cover the entire container */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents image from tiling */
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.grid-right-panel{
+    place-items: center;
+}
+
+.login-panel{
+  height:650px;
+  min-width:0;
+  background-color: white;
+  padding: 7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 6%;
+}
+
+.login-header{
+  min-height: 20px;
+}
+
+
+.login-icon{
+  display: flex;
+  align-items: center;
+  color: black;
+}
+
+.enter-cred-text{
+  font-size: 1rem;
+  color: #717182;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.login-body{
+  min-height: 20px;
+  flex-grow: 2;
+  row-gap: 6%;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-email{
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  color: black;
+}
+
+.login-password{
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  color: black;
+}
+
+.login-signin-checkbox{
+  min-height: 0;
+  color: black;
+  font-size: .8rem;
+  font-weight: 550;
+  display: flex;
+  align-items: center;
+}
+
+input[type="checkbox"]{
+  accent-color: black;
+}
+
+.portfolio-icon{
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.portfolio-icon h1{
+  font-weight: 400;
+}
+
+.about-portfolio{
+  display: flex;
+  flex-direction: column;
+}
+
+.about-portfolio h1{
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+.about-portfolio p{
+  font-size: 1.25rem;
+  font-weight: 200;
+  color:oklch(.869 .022 252.894);
+  max-width: 28rem;
+}
+
+.footer-portfolio{
+  width: 28rem;
+  display: flex;
+  justify-content:space-between;
+  align-items: left;
+}
+
+.footer-portfolio a{
+  text-decoration: none;
+  color: white;
+}
+
+a:hover{
+  color:grey;
+}
