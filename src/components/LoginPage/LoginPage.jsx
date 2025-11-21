@@ -10,17 +10,29 @@ import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import "./LoginPage.css";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
+import { LOGIN_FORM_VALIDATION } from '../../constants/constant';
+import loginIcon from '../../assets/icons/login-icon.svg'
 
 export default function LoginPage() {
   const form = useForm();
   const { register, control, handleSubmit, formState } = form;
   const { errors } = formState;
+  const loginFormValidations = LOGIN_FORM_VALIDATION;
 
   const onSubmit = (form) => {
-    console.log('Form Data --- ', form, "\n", errors);
-    console.log('Form Data1 --- ', formState);
+
   }
 
+  const isValid = (type) => {
+    if(!Object.keys(errors).length) {
+      return false;
+    }
+
+    if(type === "email")
+      return errors.email?.type === 'pattern' || errors.email?.type === "required";
+    if(type === "password")
+      return errors.password?.type === "required";
+  }
 
   return (
     <div className="grid-container">
@@ -33,9 +45,8 @@ export default function LoginPage() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              // Semi-transparent black background (0.2 opacity)
               backgroundColor: "rgba(255, 255, 255, 0.49)",
-              borderRadius: "8px", // Optional: rounded corners
+              borderRadius: "8px",
             }}
           >
             <BusinessCenterIcon
@@ -69,12 +80,13 @@ export default function LoginPage() {
         </div>
       </div>
 
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-right-panel">
           <div className="login-panel">
             <div className="login-header">
               <div className="login-icon">
-                <LoginIcon sx={{ mr: 1 }} />
+                <img src={loginIcon} />
                 <Typography variant="h6">Sign In</Typography>
               </div>
               <div className="enter-cred-text">
@@ -95,12 +107,8 @@ export default function LoginPage() {
                   type="text"
                   id="email"
                   placeholder="you@example.com"
-                  error={errors.email?.type === 'pattern'}
-                  // backgroundColor="#f5f5f5"
-                  {...register("email", { pattern: {
-                    value: /[a-zA-Z]/g,
-                    message: ":asdfahsjdgbakjshdjakshdjkashdjkahds"
-                  } }) }
+                  error={isValid("email")}
+                  {...register("email", { ...loginFormValidations.email }) }
                   sx={{
                     "& .MuiInputBase-input::placeholder": {
                       opacity: 0.5,
@@ -119,13 +127,14 @@ export default function LoginPage() {
                       ),
                     },
                   }}
-                  onChange={e => {
-                    console.log('Val -- ', e);
-                    console.log('Val -- ', errors);
+                  onChange={e=> {
+                    console.log('eee----- ', e)
+                    console.log('errors----- ', errors)
                   }}
                 />
-                <p>{errors.email?.message}</p>
+                <span className="error-container">{errors.email?.message}</span>
               </div>
+
               <div className="login-password">
                 <Typography
                   variant="body1"
@@ -139,15 +148,11 @@ export default function LoginPage() {
                   type="password"
                   id="password"
                   placeholder="••••••••"
-                  error={errors.password?.type === 'pattern'}
-                  // backgroundColor="#f5f5f5"
-                  {...register("password", { pattern: {
-                    value: /[a-zA-Z]/g,
-                    message: ":asdfahsjdgbakjshdjakshdjkashdjkahds"
-                  } }) }
+                  error={isValid("password")}
+                  {...register("password", {...loginFormValidations.password}) }
                   sx={{
                     "& .MuiInputBase-input::placeholder": {
-                      opacity: 0.5, // Ensure full visibility if needed
+                      opacity: 0.5,
                     },
                     "& .MuiInputBase-adornedStart": {
                       backgroundColor: "#f5f5f5",
@@ -162,8 +167,10 @@ export default function LoginPage() {
                       ),
                     },
                   }}
-                ></TextField>
+                />
+                <span className="error-container">{errors.password?.message}</span>
               </div>
+
               <div className="login-signin-checkbox">
                 <input
                   type="checkbox"
@@ -171,8 +178,9 @@ export default function LoginPage() {
                   name="signIn"
                   value="signIn"
                 ></input>
-                <label htmlFor="signIn">Keep me signed in</label>
+                <label className="login-checkbox-label" htmlFor="signIn">Keep me signed in</label>
               </div>
+              
               <div className="login-signin-button">
                 <Button
                   variant="contained"
